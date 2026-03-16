@@ -34,9 +34,6 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release
 
-      - name: Pack NuGet
-        run: dotnet pack --configuration Release --output ./nupkgs
-
       - name: Publish NuGet
         run: dotnet nuget push ./nupkgs/*.nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
         env:
