@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="sources/LibVLCSharp.AutoGen.Dynamic/LibVLCSharp.AutoGen.Dynamic.csproj" />
+  <Project Path="sources/LibVLCSharp.AutoGen.Static/LibVLCSharp.AutoGen.Static.csproj" Id="7c3814d7-fc8b-47c6-81db-a3e1f91ec0b1" />
+  <Project Path="sources/LibVLCSharp.AutoGen/LibVLCSharp.AutoGen.csproj" />
+</Solution>

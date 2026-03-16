@@ -1,0 +1,40 @@
+name: AutoGen & NuGet Publish
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+    env:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore .NET tools
+        run: dotnet tool restore
+
+      - name: Generate C# code from generate.rsp
+        run: |
+          cd generation
+          ClangSharpPInvokeGenerator @generate.rsp
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Pack NuGet
+        run: dotnet pack --configuration Release --output ./nupkgs
+
+      - name: Publish NuGet
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.0.3</Version>
+    <TargetFrameworks>net452;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <Authors>IOL0ol1</Authors>
+    <Description>libvlc auto-generation tools.</Description>
+    <PackageTags>vlc, libvlc, libvlcsharp</PackageTags>
+    <PackageOutputPath>$(SolutionDir)nupkgs</PackageOutputPath>
+    <PackageIcon>icon.svg</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/IOL0ol1/LibVLCSharp.AutoGen</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\icon.svg" Pack="true" PackagePath="\" />
+    <None Include="..\readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,106 @@
+# ------------------------------------------------------------------------------
+# ClangSharpPInvokeGenerator response file for libvlc
+#
+# Usage:
+#   ClangSharpPInvokeGenerator @generate.rsp
+#
+# Run this from the directory containing this file:
+#   c:\Users\IOL0o\Desktop\include\
+#
+# Requires the parent of the vlc\ folder as --include-directory so that both
+# include styles found in the headers resolve correctly:
+#   "libvlc_picture.h"       (relative, resolved from vlc\ directory)
+#   <vlc/libvlc_picture.h>   (system-style, resolved via --include-directory)
+# ------------------------------------------------------------------------------
+
+--additional
+-m64
+
+--config
+exclude-funcs-with-body
+#exclude-using-statics-for-enums
+generate-macro-bindings
+#generate-file-scoped-namespaces
+#latest-codegen
+#default-codegen
+compatible-codegen
+log-potential-typedef-remappings
+single-file
+windows-types
+#exclude-fnptr-codegen
+#generate-doc-includes
+
+# Entry point: vlc/vlc.h includes all other public headers
+--file
+vlc/vlc.h
+
+# Base path for --file entries (resolves vlc/vlc.h → vlc\vlc.h)
+--file-directory
+./vlc/include
+
+# Needed to resolve <vlc/libvlc_*.h> angle-bracket includes
+--include-directory
+./vlc/include
+./vlc/include/vlc
+
+# libvlc is a C API
+--language
+c
+
+# DllImport library name (libvlc.dll on Windows)
+--libraryPath
+libvlc
+
+--methodClassName
+libvlc
+
+--namespace
+LibVLCSharp.AutoGen
+ 
+--output
+../sources/LibVLCSharp.AutoGen/LibVLCSharp.cs
+ 
+# Limit traversal to VLC headers only; prevents generating bindings for
+# system headers pulled in transitively (stdio.h, stdint.h, stdbool.h, etc.)
+--traverse
+./vlc/include/vlc/libvlc.h
+./vlc/include/vlc/libvlc_dialog.h
+./vlc/include/vlc/libvlc_events.h
+./vlc/include/vlc/libvlc_media.h
+./vlc/include/vlc/libvlc_media_discoverer.h
+./vlc/include/vlc/libvlc_media_list.h
+./vlc/include/vlc/libvlc_media_list_player.h
+./vlc/include/vlc/libvlc_media_player.h
+./vlc/include/vlc/libvlc_media_track.h
+./vlc/include/vlc/libvlc_picture.h
+./vlc/include/vlc/libvlc_renderer_discoverer.h
+./vlc/include/vlc/libvlc_version.h
+./vlc/include/vlc/libvlc_video.h
+
+# Function-like macros cannot be auto-converted to bindings; exclude to silence warnings.
+# VLC_FORWARD_DECLARE_OBJECT(a) expands to "struct a" (a forward-declaration helper).
+# LIBVLC_VERSION(maj,min,rev,extra) is a bit-packing macro; the value macros
+# LIBVLC_VERSION_INT and LIBVLC_ABI_VERSION_INT that use it are still generated.
+--exclude
+VLC_FORWARD_DECLARE_OBJECT
+LIBVLC_VERSION
+libvlc_role_Last
+libvlc_printerr
+
+# Remap anonymous enums to named types so generated code is usable.
+#   libvlc_media.h:97    enum { libvlc_media_option_trusted, libvlc_media_option_unique }
+#   libvlc_media_player.h:61  enum { libvlc_title_menu, libvlc_title_interactive }
+#
+# Remap typedef mismatches reported by log-potential-typedef-remappings:
+#   vlc_log_t           -> libvlc_log_t         (typedef struct vlc_log_t libvlc_log_t)
+#   libvlc_media_player_role -> libvlc_media_player_role_t  (typedef enum tag vs typedef name)
+--remap
+vlc_log_t=libvlc_log_t
+libvlc_media_player_role=libvlc_media_player_role_t
+char=byte
+FILE *=@IntPtr
+va_list=@IntPtr
+
+# libvlc uses cdecl calling convention (standard for C libraries)
+--with-callconv
+*=Cdecl

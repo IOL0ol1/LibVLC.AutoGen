@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net452;netstandard2.0;netstandard2.1</TargetFrameworks> 
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\LibVLCSharp.AutoGen\LibVLCSharp.cs" Link="LibVLCSharp.cs" />
+		<Compile Include="..\LibVLCSharp.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="LazyImport.Fody" Version="1.0.2" PrivateAssets="All" />
+	</ItemGroup>
+
+</Project>

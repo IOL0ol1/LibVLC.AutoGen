@@ -1,0 +1,68 @@
+
+name: Major Version Bump & Tag
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天0点UTC
+  workflow_dispatch:
+
+jobs:
+  bump-major-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Update submodule to latest
+        run: |
+          git submodule update --remote generation/vlc
+
+      - name: Check if include/vlc updated
+        id: check_include_vlc
+        run: |
+          if [ -n "$(git status --porcelain generation/vlc/include/vlc)" ]; then
+            echo "updated=true" >> $GITHUB_OUTPUT
+          else
+            echo "updated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get current version
+        id: get_version
+        run: |
+          VERSION=$(grep -oP '<Version>\K[0-9]+\.[0-9]+\.[0-9]+' Directory.Build.props)
+          echo "Current version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Bump major version
+        if: steps.check_include_vlc.outputs.updated == 'true'
+        id: bump_version
+        run: |
+          OLD_VERSION=${{ steps.get_version.outputs.version }}
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$OLD_VERSION"
+          NEW_MAJOR=$((MAJOR+1))
+          NEW_VERSION="$NEW_MAJOR.0.0"
+          sed -i "s/<Version>$OLD_VERSION/<Version>$NEW_VERSION/" Directory.Build.props
+          echo "New version: $NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.check_include_vlc.outputs.updated == 'true'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add Directory.Build.props generation/vlc
+          git commit -m "Bump MAJOR version to ${{ steps.bump_version.outputs.new_version }} (vlc/include/vlc updated)"
+          git push
+
+      - name: Create Git Tag
+        if: steps.check_include_vlc.outputs.updated == 'true'
+        run: |
+          git tag v${{ steps.bump_version.outputs.new_version }}
+          git push origin v${{ steps.bump_version.outputs.new_version }}
