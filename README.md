@@ -1,7 +1,7 @@
-# LibVLCSharp.AutoGen
+# LibVLC.AutoGen
 
-[![NuGet Version](https://img.shields.io/nuget/v/LibVLCSharp.AutoGen.svg)](https://www.nuget.org/packages/LibVLCSharp.AutoGen/)
-[![NuGet Downloads](https://img.shields.io/nuget/dt/LibVLCSharp.AutoGen.svg)](https://www.nuget.org/packages/LibVLCSharp.AutoGen/)
+[![NuGet Version](https://img.shields.io/nuget/v/LibVLC.AutoGen.svg)](https://www.nuget.org/packages/LibVLC.AutoGen/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/LibVLC.AutoGen.svg)](https://www.nuget.org/packages/LibVLC.AutoGen/)
 
  P/Invoke bindings auto-generated from libvlc headers using ClangSharpPInvokeGenerator.
 
@@ -16,12 +16,12 @@ Feedback and contributions are welcome!
 
 
 # List
-- `LibVLCSharp.AutoGen` is a standard wrapper using `[DllImport("libvlc")]`.
-- `LibVLCSharp.AutoGen.Static` using `[DllImport("__Internal")]` for static linked libvlc.
-- `LibVLCSharp.AutoGen.Dynamic` for runtime loaded libvlc.    
+- `LibVLC.AutoGen` is a standard wrapper using `[DllImport("libvlc")]`.
+- `LibVLC.AutoGen.Static` using `[DllImport("__Internal")]` for static linked libvlc.
+- `LibVLC.AutoGen.Dynamic` for runtime loaded libvlc.    
 
 Their usage is identical.      
-Only `LibVLCSharp.AutoGen.Dynamic` requires manual initialization.    
+Only `LibVLC.AutoGen.Dynamic` requires manual initialization.    
 `libvlc.initialize(string dllPath)` or `libvlc.initialize(IntPtr dllHandle)`    
 
 
@@ -32,7 +32,7 @@ Only `LibVLCSharp.AutoGen.Dynamic` requires manual initialization.
     You can use `libvlc_media_player_role_t.libvlc_role_Test` instead.
 
 # TODO
-Create a new VLC control using the updated rendering API `libvlc_video_set_output_callbacks`.
+Create a new VLC media control using the video rendering API `libvlc_video_set_output_callbacks`.
 
 
 # Reference & Thanks
@@ -43,3 +43,7 @@ Create a new VLC control using the updated rendering API `libvlc_video_set_outpu
 
 - [FFmpeg.AutoGen](https://github.com/Ruslan-B/FFmpeg.AutoGen) 
 
+# License
+ 
+ This project is licensed under the MIT License.      
+ The LibVLC is licensed under the GNU LGPLv2.1 License, use and distribution must comply with the LGPL.

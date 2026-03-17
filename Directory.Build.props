@@ -5,7 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>IOL0ol1</Authors>
-    <Description>libvlc auto-generation tools.</Description>
+    <Description>libvlc auto-generation P/Invoke bindings.</Description>
     <PackageTags>vlc, libvlc, libvlcsharp</PackageTags>
     <PackageOutputPath>$(SolutionDir)nupkgs</PackageOutputPath>
     <PackageIcon>icon.png</PackageIcon>
