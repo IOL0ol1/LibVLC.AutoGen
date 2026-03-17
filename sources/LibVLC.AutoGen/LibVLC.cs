@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace LibVLCSharp.AutoGen
+namespace LibVLC.AutoGen
 {
     public partial struct libvlc_instance_t
     {

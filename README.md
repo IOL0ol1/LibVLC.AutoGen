@@ -3,12 +3,16 @@
 [![NuGet Version](https://img.shields.io/nuget/v/LibVLC.AutoGen.svg)](https://www.nuget.org/packages/LibVLC.AutoGen/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/LibVLC.AutoGen.svg)](https://www.nuget.org/packages/LibVLC.AutoGen/)
 
+
+ **!!!!! This is NOT an official libVLC project !!!!!**
+ 
  P/Invoke bindings auto-generated from libvlc headers using ClangSharpPInvokeGenerator.
+
 
 # Why this project?
 This project started because I needed to use libvlc_video_set_output_callbacks, the video rendering API from LibVLC 4.0.0.     
 I believe it provides a cleaner solution to airspace issues in WPF and other UI frameworks.    
-While LibVLCSharp is very well-designed, the v4 prerelease is not yet officially stable, and its interop layer is not fully automated.     
+While [LibVLCSharp](https://github.com/videolan/libvlcsharp)  is very well-designed, the v4 prerelease is not yet officially stable, and its interop layer is not fully automated.     
 For that reason, I created this fresh project:     
 It uses GitHub Actions and ClangSharpPInvokeGenerator to automatically generate up-to-date P/Invoke bindings for VLC.
 

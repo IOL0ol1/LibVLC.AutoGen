@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LibVLCSharp.AutoGen
+namespace LibVLC.AutoGen
 { 
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public sealed class NativeTypeNameAttribute : Attribute

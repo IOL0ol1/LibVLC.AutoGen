@@ -55,10 +55,10 @@ libvlc
 libvlc
 
 --namespace
-LibVLCSharp.AutoGen
+LibVLC.AutoGen
  
 --output
-../sources/LibVLCSharp.AutoGen/LibVLCSharp.cs
+../sources/LibVLC.AutoGen/LibVLC.cs
  
 # Limit traversal to VLC headers only; prevents generating bindings for
 # system headers pulled in transitively (stdio.h, stdint.h, stdbool.h, etc.)

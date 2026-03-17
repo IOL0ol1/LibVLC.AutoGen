@@ -3,11 +3,12 @@
 	<PropertyGroup>
 		<TargetFrameworks>net452;netstandard2.0;netstandard2.1</TargetFrameworks>
 		<PackageId>LibVLC.AutoGen.Static</PackageId>
+		<Description>[unofficial] libvlc auto-generation P/Invoke bindings using [DllImport("__Internal")] for static linked libvlc.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="..\LibVLCSharp.AutoGen\LibVLCSharp.cs" Link="LibVLCSharp.cs" />
-		<Compile Include="..\LibVLCSharp.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
+		<Compile Include="..\LibVLC.AutoGen\LibVLC.cs" Link="LibVLC.cs" />
+		<Compile Include="..\LibVLC.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

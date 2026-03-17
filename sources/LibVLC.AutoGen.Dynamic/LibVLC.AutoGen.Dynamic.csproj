@@ -3,11 +3,12 @@
 	<PropertyGroup>
 		<TargetFrameworks>net452;netstandard2.0;netstandard2.1</TargetFrameworks>
 		<PackageId>LibVLC.AutoGen.Dynamic</PackageId>
+		<Description>[unofficial] libvlc auto-generation P/Invoke bindings using runtime dynamic linking, with libvlc.initialize(handle or path) to be called first.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="..\LibVLCSharp.AutoGen\LibVLCSharp.cs" Link="LibVLCSharp.cs" />
-		<Compile Include="..\LibVLCSharp.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
+		<Compile Include="..\LibVLC.AutoGen\LibVLC.cs" Link="LibVLC.cs" />
+		<Compile Include="..\LibVLC.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

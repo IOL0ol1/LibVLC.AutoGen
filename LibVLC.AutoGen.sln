@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11605.240
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLC.AutoGen", "sources\LibVLC.AutoGen\LibVLC.AutoGen.csproj", "{D66D7A98-A623-DB58-DA75-564E80852732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLC.AutoGen.Dynamic", "sources\LibVLC.AutoGen.Dynamic\LibVLC.AutoGen.Dynamic.csproj", "{FAD90C26-2B81-E906-92F4-88F9AE778899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLC.AutoGen.Static", "sources\LibVLC.AutoGen.Static\LibVLC.AutoGen.Static.csproj", "{56C6183E-5FAC-37E2-ACCC-041C879EB563}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D66D7A98-A623-DB58-DA75-564E80852732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66D7A98-A623-DB58-DA75-564E80852732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66D7A98-A623-DB58-DA75-564E80852732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66D7A98-A623-DB58-DA75-564E80852732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD90C26-2B81-E906-92F4-88F9AE778899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD90C26-2B81-E906-92F4-88F9AE778899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD90C26-2B81-E906-92F4-88F9AE778899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD90C26-2B81-E906-92F4-88F9AE778899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACA57B7E-139B-4831-88C1-0CD9389CF088}
+	EndGlobalSection
+EndGlobal
