@@ -17,7 +17,7 @@
 -m64
 
 --config
-exclude-funcs-with-body
+#exclude-funcs-with-body
 #exclude-using-statics-for-enums
 generate-macro-bindings
 #generate-file-scoped-namespaces
@@ -98,8 +98,12 @@ libvlc_printerr
 vlc_log_t=libvlc_log_t
 libvlc_media_player_role=libvlc_media_player_role_t
 char=byte
+bool=byte
+void*=@IntPtr
 FILE *=@IntPtr
-va_list=@IntPtr
+
+#--prefixStrip
+#libvlc_ 
 
 # libvlc uses cdecl calling convention (standard for C libraries)
 --with-callconv

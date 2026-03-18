@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using static LibVLC.AutoGen.libvlc_video_engine_t;
 
 namespace LibVLC.AutoGen
 {
@@ -12,7 +13,7 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_callback_t([NativeTypeName("const struct libvlc_event_t *")] libvlc_event_t* p_event, void* p_data);
+    public unsafe delegate void libvlc_callback_t([NativeTypeName("const struct libvlc_event_t *")] libvlc_event_t* p_event, [NativeTypeName("void*")] IntPtr p_data);
 
     public enum libvlc_log_level
     {
@@ -27,7 +28,7 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_log_cb(void* data, int level, [NativeTypeName("const libvlc_log_t *")] libvlc_log_t* ctx, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] IntPtr args);
+    public unsafe delegate void libvlc_log_cb([NativeTypeName("void*")] IntPtr data, int level, [NativeTypeName("const libvlc_log_t *")] libvlc_log_t* ctx, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* args);
 
     public unsafe partial struct libvlc_module_description_t
     {
@@ -404,17 +405,17 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int libvlc_media_open_cb(void* opaque, void** datap, [NativeTypeName("uint64_t *")] ulong* sizep);
+    public unsafe delegate int libvlc_media_open_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("void **")] IntPtr* datap, [NativeTypeName("uint64_t *")] ulong* sizep);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: NativeTypeName("ptrdiff_t")]
-    public unsafe delegate IntPtr libvlc_media_read_cb(void* opaque, [NativeTypeName("unsigned char *")] byte* buf, [NativeTypeName("size_t")] UIntPtr len);
+    public unsafe delegate IntPtr libvlc_media_read_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("unsigned char *")] byte* buf, [NativeTypeName("size_t")] UIntPtr len);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int libvlc_media_seek_cb(void* opaque, [NativeTypeName("uint64_t")] ulong offset);
+    public delegate int libvlc_media_seek_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("uint64_t")] ulong offset);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_media_close_cb(void* opaque);
+    public delegate void libvlc_media_close_cb([NativeTypeName("void*")] IntPtr opaque);
 
     public partial struct libvlc_media_list_t
     {
@@ -579,20 +580,21 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void* libvlc_video_lock_cb(void* opaque, void** planes);
+    [return: NativeTypeName("void*")]
+    public unsafe delegate IntPtr libvlc_video_lock_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("void **")] IntPtr* planes);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_unlock_cb(void* opaque, void* picture, [NativeTypeName("void *const *")] void** planes);
+    public unsafe delegate void libvlc_video_unlock_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("void*")] IntPtr picture, [NativeTypeName("void *const *")] IntPtr* planes);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_display_cb(void* opaque, void* picture);
+    public delegate void libvlc_video_display_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("void*")] IntPtr picture);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: NativeTypeName("unsigned int")]
-    public unsafe delegate uint libvlc_video_format_cb(void** opaque, [NativeTypeName("char *")] byte* chroma, [NativeTypeName("unsigned int *")] uint* width, [NativeTypeName("unsigned int *")] uint* height, [NativeTypeName("unsigned int *")] uint* pitches, [NativeTypeName("unsigned int *")] uint* lines);
+    public unsafe delegate uint libvlc_video_format_cb([NativeTypeName("void **")] IntPtr* opaque, [NativeTypeName("char *")] byte* chroma, [NativeTypeName("unsigned int *")] uint* width, [NativeTypeName("unsigned int *")] uint* height, [NativeTypeName("unsigned int *")] uint* pitches, [NativeTypeName("unsigned int *")] uint* lines);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_cleanup_cb(void* opaque);
+    public delegate void libvlc_video_cleanup_cb([NativeTypeName("void*")] IntPtr opaque);
 
     public partial struct libvlc_video_setup_device_cfg_t
     {
@@ -638,16 +640,19 @@ namespace LibVLC.AutoGen
             [NativeTypeName("__AnonymousRecord_libvlc_media_player_L551_C9")]
             public _d3d9_e__Struct d3d9;
 
-            public unsafe partial struct _d3d11_e__Struct
+            public partial struct _d3d11_e__Struct
             {
-                public void* device_context;
+                [NativeTypeName("void*")]
+                public IntPtr device_context;
 
-                public void* context_mutex;
+                [NativeTypeName("void*")]
+                public IntPtr context_mutex;
             }
 
-            public unsafe partial struct _d3d9_e__Struct
+            public partial struct _d3d9_e__Struct
             {
-                public void* device;
+                [NativeTypeName("void*")]
+                public IntPtr device;
 
                 public int adapter;
             }
@@ -656,12 +661,12 @@ namespace LibVLC.AutoGen
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: NativeTypeName("_Bool")]
-    public unsafe delegate bool libvlc_video_output_setup_cb(void** opaque, [NativeTypeName("const libvlc_video_setup_device_cfg_t *")] libvlc_video_setup_device_cfg_t* cfg, libvlc_video_setup_device_info_t* @out);
+    public unsafe delegate byte libvlc_video_output_setup_cb([NativeTypeName("void **")] IntPtr* opaque, [NativeTypeName("const libvlc_video_setup_device_cfg_t *")] libvlc_video_setup_device_cfg_t* cfg, libvlc_video_setup_device_info_t* @out);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_output_cleanup_cb(void* opaque);
+    public delegate void libvlc_video_output_cleanup_cb([NativeTypeName("void*")] IntPtr opaque);
 
-    public unsafe partial struct libvlc_video_render_cfg_t
+    public partial struct libvlc_video_render_cfg_t
     {
         [NativeTypeName("unsigned int")]
         public uint width;
@@ -681,7 +686,8 @@ namespace LibVLC.AutoGen
 
         public libvlc_video_transfer_func_t transfer;
 
-        public void* device;
+        [NativeTypeName("void*")]
+        public IntPtr device;
     }
 
     public unsafe partial struct libvlc_video_output_cfg_t
@@ -733,7 +739,7 @@ namespace LibVLC.AutoGen
             }
         }
 
-        public ref void* p_surface
+        public ref IntPtr p_surface
         {
             get
             {
@@ -756,7 +762,7 @@ namespace LibVLC.AutoGen
         }
 
         [StructLayout(LayoutKind.Explicit)]
-        public unsafe partial struct _Anonymous_e__Union
+        public partial struct _Anonymous_e__Union
         {
             [FieldOffset(0)]
             public int dxgi_format;
@@ -769,34 +775,38 @@ namespace LibVLC.AutoGen
             public int opengl_format;
 
             [FieldOffset(0)]
-            public void* p_surface;
+            [NativeTypeName("void*")]
+            public IntPtr p_surface;
 
             [FieldOffset(0)]
             [NativeTypeName("__AnonymousRecord_libvlc_media_player_L629_C9")]
             public _anw_e__Struct anw;
 
-            public unsafe partial struct _anw_e__Struct
+            public partial struct _anw_e__Struct
             {
-                public void* video;
+                [NativeTypeName("void*")]
+                public IntPtr video;
 
-                public void* subtitle;
+                [NativeTypeName("void*")]
+                public IntPtr subtitle;
             }
         }
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: NativeTypeName("_Bool")]
-    public unsafe delegate bool libvlc_video_update_output_cb(void* opaque, [NativeTypeName("const libvlc_video_render_cfg_t *")] libvlc_video_render_cfg_t* cfg, libvlc_video_output_cfg_t* output);
+    public unsafe delegate byte libvlc_video_update_output_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("const libvlc_video_render_cfg_t *")] libvlc_video_render_cfg_t* cfg, libvlc_video_output_cfg_t* output);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_swap_cb(void* opaque);
+    public delegate void libvlc_video_swap_cb([NativeTypeName("void*")] IntPtr opaque);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: NativeTypeName("_Bool")]
-    public unsafe delegate bool libvlc_video_makeCurrent_cb(void* opaque, [NativeTypeName("_Bool")] bool enter);
+    public delegate byte libvlc_video_makeCurrent_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("_Bool")] byte enter);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void* libvlc_video_getProcAddress_cb(void* opaque, [NativeTypeName("const char *")] byte* fct_name);
+    [return: NativeTypeName("void*")]
+    public unsafe delegate IntPtr libvlc_video_getProcAddress_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("const char *")] byte* fct_name);
 
     public unsafe partial struct libvlc_video_frame_hdr10_metadata_t
     {
@@ -831,7 +841,7 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_frameMetadata_cb(void* opaque, libvlc_video_metadata_type_t type, [NativeTypeName("const void *")] void* metadata);
+    public delegate void libvlc_video_frameMetadata_cb([NativeTypeName("void*")] IntPtr opaque, libvlc_video_metadata_type_t type, [NativeTypeName("const void *")] IntPtr metadata);
 
     public enum libvlc_video_engine_t
     {
@@ -844,7 +854,7 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_output_resize_cb(void* report_opaque, [NativeTypeName("unsigned int")] uint width, [NativeTypeName("unsigned int")] uint height);
+    public delegate void libvlc_video_output_resize_cb([NativeTypeName("void*")] IntPtr report_opaque, [NativeTypeName("unsigned int")] uint width, [NativeTypeName("unsigned int")] uint height);
 
     public enum libvlc_video_output_mouse_button_t
     {
@@ -854,44 +864,44 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_output_mouse_move_cb(void* opaque, int x, int y);
+    public delegate void libvlc_video_output_mouse_move_cb([NativeTypeName("void*")] IntPtr opaque, int x, int y);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_output_mouse_press_cb(void* opaque, libvlc_video_output_mouse_button_t button);
+    public delegate void libvlc_video_output_mouse_press_cb([NativeTypeName("void*")] IntPtr opaque, libvlc_video_output_mouse_button_t button);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_output_mouse_release_cb(void* opaque, libvlc_video_output_mouse_button_t button);
+    public delegate void libvlc_video_output_mouse_release_cb([NativeTypeName("void*")] IntPtr opaque, libvlc_video_output_mouse_button_t button);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_video_output_set_window_cb(void* opaque, [NativeTypeName("libvlc_video_output_resize_cb")] IntPtr report_size_change, [NativeTypeName("libvlc_video_output_mouse_move_cb")] IntPtr report_mouse_move, [NativeTypeName("libvlc_video_output_mouse_press_cb")] IntPtr report_mouse_pressed, [NativeTypeName("libvlc_video_output_mouse_release_cb")] IntPtr report_mouse_released, void* report_opaque);
+    public delegate void libvlc_video_output_set_window_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("libvlc_video_output_resize_cb")] IntPtr report_size_change, [NativeTypeName("libvlc_video_output_mouse_move_cb")] IntPtr report_mouse_move, [NativeTypeName("libvlc_video_output_mouse_press_cb")] IntPtr report_mouse_pressed, [NativeTypeName("libvlc_video_output_mouse_release_cb")] IntPtr report_mouse_released, [NativeTypeName("void*")] IntPtr report_opaque);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: NativeTypeName("_Bool")]
-    public unsafe delegate bool libvlc_video_output_select_plane_cb(void* opaque, [NativeTypeName("size_t")] UIntPtr plane, void* output);
+    public delegate byte libvlc_video_output_select_plane_cb([NativeTypeName("void*")] IntPtr opaque, [NativeTypeName("size_t")] UIntPtr plane, [NativeTypeName("void*")] IntPtr output);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_play_cb(void* data, [NativeTypeName("const void *")] void* samples, [NativeTypeName("unsigned int")] uint count, [NativeTypeName("int64_t")] long pts);
+    public delegate void libvlc_audio_play_cb([NativeTypeName("void*")] IntPtr data, [NativeTypeName("const void *")] IntPtr samples, [NativeTypeName("unsigned int")] uint count, [NativeTypeName("int64_t")] long pts);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_pause_cb(void* data, [NativeTypeName("int64_t")] long pts);
+    public delegate void libvlc_audio_pause_cb([NativeTypeName("void*")] IntPtr data, [NativeTypeName("int64_t")] long pts);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_resume_cb(void* data, [NativeTypeName("int64_t")] long pts);
+    public delegate void libvlc_audio_resume_cb([NativeTypeName("void*")] IntPtr data, [NativeTypeName("int64_t")] long pts);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_flush_cb(void* data, [NativeTypeName("int64_t")] long pts);
+    public delegate void libvlc_audio_flush_cb([NativeTypeName("void*")] IntPtr data, [NativeTypeName("int64_t")] long pts);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_drain_cb(void* data);
+    public delegate void libvlc_audio_drain_cb([NativeTypeName("void*")] IntPtr data);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_set_volume_cb(void* data, float volume, [NativeTypeName("_Bool")] bool mute);
+    public delegate void libvlc_audio_set_volume_cb([NativeTypeName("void*")] IntPtr data, float volume, [NativeTypeName("_Bool")] byte mute);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int libvlc_audio_setup_cb(void** opaque, [NativeTypeName("char *")] byte* format, [NativeTypeName("unsigned int *")] uint* rate, [NativeTypeName("unsigned int *")] uint* channels);
+    public unsafe delegate int libvlc_audio_setup_cb([NativeTypeName("void **")] IntPtr* opaque, [NativeTypeName("char *")] byte* format, [NativeTypeName("unsigned int *")] uint* rate, [NativeTypeName("unsigned int *")] uint* channels);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_audio_cleanup_cb(void* opaque);
+    public delegate void libvlc_audio_cleanup_cb([NativeTypeName("void*")] IntPtr opaque);
 
     public unsafe partial struct libvlc_player_program_t
     {
@@ -994,13 +1004,13 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_media_player_watch_time_on_update([NativeTypeName("const libvlc_media_player_time_point_t *")] libvlc_media_player_time_point_t* value, void* data);
+    public unsafe delegate void libvlc_media_player_watch_time_on_update([NativeTypeName("const libvlc_media_player_time_point_t *")] libvlc_media_player_time_point_t* value, [NativeTypeName("void*")] IntPtr data);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_media_player_watch_time_on_paused([NativeTypeName("int64_t")] long system_date_us, void* data);
+    public delegate void libvlc_media_player_watch_time_on_paused([NativeTypeName("int64_t")] long system_date_us, [NativeTypeName("void*")] IntPtr data);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_media_player_watch_time_on_seek([NativeTypeName("const libvlc_media_player_time_point_t *")] libvlc_media_player_time_point_t* value, void* data);
+    public unsafe delegate void libvlc_media_player_watch_time_on_seek([NativeTypeName("const libvlc_media_player_time_point_t *")] libvlc_media_player_time_point_t* value, [NativeTypeName("void*")] IntPtr data);
 
     public partial struct libvlc_media_list_player_t
     {
@@ -1098,11 +1108,12 @@ namespace LibVLC.AutoGen
         libvlc_MediaPlayerMediaStopping,
     }
 
-    public unsafe partial struct libvlc_event_t
+    public partial struct libvlc_event_t
     {
         public int type;
 
-        public void* p_obj;
+        [NativeTypeName("void*")]
+        public IntPtr p_obj;
 
         [NativeTypeName("__AnonymousRecord_libvlc_events_L264_C5")]
         public _u_e__Union u;
@@ -1490,7 +1501,7 @@ namespace LibVLC.AutoGen
     }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void libvlc_dialog_error_cbs(void* p_data, [NativeTypeName("const char *")] byte* psz_title, [NativeTypeName("const char *")] byte* psz_text);
+    public unsafe delegate void libvlc_dialog_error_cbs([NativeTypeName("void*")] IntPtr p_data, [NativeTypeName("const char *")] byte* psz_title, [NativeTypeName("const char *")] byte* psz_text);
 
     public static unsafe partial class libvlc
     {
@@ -1532,13 +1543,13 @@ namespace LibVLC.AutoGen
         public static extern byte* libvlc_get_changeset();
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_free(void* ptr);
+        public static extern void libvlc_free([NativeTypeName("void*")] IntPtr ptr);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int libvlc_event_attach(libvlc_event_manager_t* p_event_manager, [NativeTypeName("libvlc_event_type_t")] int i_event_type, [NativeTypeName("libvlc_callback_t")] IntPtr f_callback, void* user_data);
+        public static extern int libvlc_event_attach(libvlc_event_manager_t* p_event_manager, [NativeTypeName("libvlc_event_type_t")] int i_event_type, [NativeTypeName("libvlc_callback_t")] IntPtr f_callback, [NativeTypeName("void*")] IntPtr user_data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_event_detach(libvlc_event_manager_t* p_event_manager, [NativeTypeName("libvlc_event_type_t")] int i_event_type, [NativeTypeName("libvlc_callback_t")] IntPtr f_callback, void* p_user_data);
+        public static extern void libvlc_event_detach(libvlc_event_manager_t* p_event_manager, [NativeTypeName("libvlc_event_type_t")] int i_event_type, [NativeTypeName("libvlc_callback_t")] IntPtr f_callback, [NativeTypeName("void*")] IntPtr p_user_data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void libvlc_log_get_context([NativeTypeName("const libvlc_log_t *")] libvlc_log_t* ctx, [NativeTypeName("const char **")] byte** module, [NativeTypeName("const char **")] byte** file, [NativeTypeName("unsigned int *")] uint* line);
@@ -1550,7 +1561,7 @@ namespace LibVLC.AutoGen
         public static extern void libvlc_log_unset(libvlc_instance_t* p_instance);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_log_set(libvlc_instance_t* p_instance, [NativeTypeName("libvlc_log_cb")] IntPtr cb, void* data);
+        public static extern void libvlc_log_set(libvlc_instance_t* p_instance, [NativeTypeName("libvlc_log_cb")] IntPtr cb, [NativeTypeName("void*")] IntPtr data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void libvlc_log_set_file(libvlc_instance_t* p_instance, [NativeTypeName("FILE *")] IntPtr stream);
@@ -1567,6 +1578,12 @@ namespace LibVLC.AutoGen
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("int64_t")]
         public static extern long libvlc_clock();
+
+        [return: NativeTypeName("int64_t")]
+        public static long libvlc_delay([NativeTypeName("int64_t")] long pts)
+        {
+            return pts - libvlc_clock();
+        }
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern libvlc_renderer_item_t* libvlc_renderer_item_hold(libvlc_renderer_item_t* p_item);
@@ -1682,7 +1699,7 @@ namespace LibVLC.AutoGen
         public static extern libvlc_media_t* libvlc_media_new_fd(int fd);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern libvlc_media_t* libvlc_media_new_callbacks([NativeTypeName("libvlc_media_open_cb")] IntPtr open_cb, [NativeTypeName("libvlc_media_read_cb")] IntPtr read_cb, [NativeTypeName("libvlc_media_seek_cb")] IntPtr seek_cb, [NativeTypeName("libvlc_media_close_cb")] IntPtr close_cb, void* opaque);
+        public static extern libvlc_media_t* libvlc_media_new_callbacks([NativeTypeName("libvlc_media_open_cb")] IntPtr open_cb, [NativeTypeName("libvlc_media_read_cb")] IntPtr read_cb, [NativeTypeName("libvlc_media_seek_cb")] IntPtr seek_cb, [NativeTypeName("libvlc_media_close_cb")] IntPtr close_cb, [NativeTypeName("void*")] IntPtr opaque);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern libvlc_media_t* libvlc_media_new_as_node([NativeTypeName("const char *")] byte* psz_name);
@@ -1758,10 +1775,11 @@ namespace LibVLC.AutoGen
         public static extern libvlc_media_parsed_status_t libvlc_media_get_parsed_status(libvlc_media_t* p_md);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_media_set_user_data(libvlc_media_t* p_md, void* p_new_user_data);
+        public static extern void libvlc_media_set_user_data(libvlc_media_t* p_md, [NativeTypeName("void*")] IntPtr p_new_user_data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* libvlc_media_get_user_data(libvlc_media_t* p_md);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr libvlc_media_get_user_data(libvlc_media_t* p_md);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern libvlc_media_tracklist_t* libvlc_media_get_tracklist(libvlc_media_t* p_md, libvlc_track_type_t type);
@@ -1839,7 +1857,7 @@ namespace LibVLC.AutoGen
         public static extern int libvlc_media_player_set_renderer(libvlc_media_player_t* p_mi, libvlc_renderer_item_t* p_item);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_video_set_callbacks(libvlc_media_player_t* mp, [NativeTypeName("libvlc_video_lock_cb")] IntPtr @lock, [NativeTypeName("libvlc_video_unlock_cb")] IntPtr unlock, [NativeTypeName("libvlc_video_display_cb")] IntPtr display, void* opaque);
+        public static extern void libvlc_video_set_callbacks(libvlc_media_player_t* mp, [NativeTypeName("libvlc_video_lock_cb")] IntPtr @lock, [NativeTypeName("libvlc_video_unlock_cb")] IntPtr unlock, [NativeTypeName("libvlc_video_display_cb")] IntPtr display, [NativeTypeName("void*")] IntPtr opaque);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void libvlc_video_set_format(libvlc_media_player_t* mp, [NativeTypeName("const char *")] byte* chroma, [NativeTypeName("unsigned int")] uint width, [NativeTypeName("unsigned int")] uint height, [NativeTypeName("unsigned int")] uint pitch);
@@ -1849,13 +1867,20 @@ namespace LibVLC.AutoGen
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("_Bool")]
-        public static extern byte libvlc_video_set_output_callbacks(libvlc_media_player_t* mp, libvlc_video_engine_t engine, [NativeTypeName("libvlc_video_output_setup_cb")] IntPtr setup_cb, [NativeTypeName("libvlc_video_output_cleanup_cb")] IntPtr cleanup_cb, [NativeTypeName("libvlc_video_output_set_window_cb")] IntPtr window_cb, [NativeTypeName("libvlc_video_update_output_cb")] IntPtr update_output_cb, [NativeTypeName("libvlc_video_swap_cb")] IntPtr swap_cb, [NativeTypeName("libvlc_video_makeCurrent_cb")] IntPtr makeCurrent_cb, [NativeTypeName("libvlc_video_getProcAddress_cb")] IntPtr getProcAddress_cb, [NativeTypeName("libvlc_video_frameMetadata_cb")] IntPtr metadata_cb, [NativeTypeName("libvlc_video_output_select_plane_cb")] IntPtr select_plane_cb, void* opaque);
+        public static extern byte libvlc_video_set_output_callbacks(libvlc_media_player_t* mp, libvlc_video_engine_t engine, [NativeTypeName("libvlc_video_output_setup_cb")] IntPtr setup_cb, [NativeTypeName("libvlc_video_output_cleanup_cb")] IntPtr cleanup_cb, [NativeTypeName("libvlc_video_output_set_window_cb")] IntPtr window_cb, [NativeTypeName("libvlc_video_update_output_cb")] IntPtr update_output_cb, [NativeTypeName("libvlc_video_swap_cb")] IntPtr swap_cb, [NativeTypeName("libvlc_video_makeCurrent_cb")] IntPtr makeCurrent_cb, [NativeTypeName("libvlc_video_getProcAddress_cb")] IntPtr getProcAddress_cb, [NativeTypeName("libvlc_video_frameMetadata_cb")] IntPtr metadata_cb, [NativeTypeName("libvlc_video_output_select_plane_cb")] IntPtr select_plane_cb, [NativeTypeName("void*")] IntPtr opaque);
+
+        [return: NativeTypeName("_Bool")]
+        public static byte libvlc_video_set_anw_callbacks(libvlc_media_player_t* mp, [NativeTypeName("libvlc_video_output_setup_cb")] IntPtr setup_cb, [NativeTypeName("libvlc_video_output_cleanup_cb")] IntPtr cleanup_cb, [NativeTypeName("libvlc_video_update_output_cb")] IntPtr update_output_cb, [NativeTypeName("void*")] IntPtr opaque)
+        {
+            return libvlc_video_set_output_callbacks(mp, (libvlc_video_engine_t)(libvlc_video_engine_anw), setup_cb, cleanup_cb, uncheckednull, update_output_cb, uncheckednull, uncheckednull, uncheckednull, uncheckednull, uncheckednull, opaque);
+        }
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_media_player_set_nsobject(libvlc_media_player_t* p_mi, void* drawable);
+        public static extern void libvlc_media_player_set_nsobject(libvlc_media_player_t* p_mi, [NativeTypeName("void*")] IntPtr drawable);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* libvlc_media_player_get_nsobject(libvlc_media_player_t* p_mi);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr libvlc_media_player_get_nsobject(libvlc_media_player_t* p_mi);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void libvlc_media_player_set_xwindow(libvlc_media_player_t* p_mi, [NativeTypeName("uint32_t")] uint drawable);
@@ -1865,16 +1890,17 @@ namespace LibVLC.AutoGen
         public static extern uint libvlc_media_player_get_xwindow(libvlc_media_player_t* p_mi);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_media_player_set_hwnd(libvlc_media_player_t* p_mi, void* drawable);
+        public static extern void libvlc_media_player_set_hwnd(libvlc_media_player_t* p_mi, [NativeTypeName("void*")] IntPtr drawable);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* libvlc_media_player_get_hwnd(libvlc_media_player_t* p_mi);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr libvlc_media_player_get_hwnd(libvlc_media_player_t* p_mi);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_media_player_set_android_context(libvlc_media_player_t* p_mi, void* p_awindow_handler);
+        public static extern void libvlc_media_player_set_android_context(libvlc_media_player_t* p_mi, [NativeTypeName("void*")] IntPtr p_awindow_handler);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_audio_set_callbacks(libvlc_media_player_t* mp, [NativeTypeName("libvlc_audio_play_cb")] IntPtr play, [NativeTypeName("libvlc_audio_pause_cb")] IntPtr pause, [NativeTypeName("libvlc_audio_resume_cb")] IntPtr resume, [NativeTypeName("libvlc_audio_flush_cb")] IntPtr flush, [NativeTypeName("libvlc_audio_drain_cb")] IntPtr drain, void* opaque);
+        public static extern void libvlc_audio_set_callbacks(libvlc_media_player_t* mp, [NativeTypeName("libvlc_audio_play_cb")] IntPtr play, [NativeTypeName("libvlc_audio_pause_cb")] IntPtr pause, [NativeTypeName("libvlc_audio_resume_cb")] IntPtr resume, [NativeTypeName("libvlc_audio_flush_cb")] IntPtr flush, [NativeTypeName("libvlc_audio_drain_cb")] IntPtr drain, [NativeTypeName("void*")] IntPtr opaque);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void libvlc_audio_set_volume_callback(libvlc_media_player_t* mp, [NativeTypeName("libvlc_audio_set_volume_cb")] IntPtr set_volume);
@@ -2277,7 +2303,7 @@ namespace LibVLC.AutoGen
         public static extern void libvlc_media_player_record(libvlc_media_player_t* p_mi, [NativeTypeName("_Bool")] byte enable, [NativeTypeName("const char *")] byte* dir_path);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int libvlc_media_player_watch_time(libvlc_media_player_t* p_mi, [NativeTypeName("int64_t")] long min_period_us, [NativeTypeName("libvlc_media_player_watch_time_on_update")] IntPtr on_update, [NativeTypeName("libvlc_media_player_watch_time_on_paused")] IntPtr on_paused, [NativeTypeName("libvlc_media_player_watch_time_on_seek")] IntPtr on_seek, void* cbs_data);
+        public static extern int libvlc_media_player_watch_time(libvlc_media_player_t* p_mi, [NativeTypeName("int64_t")] long min_period_us, [NativeTypeName("libvlc_media_player_watch_time_on_update")] IntPtr on_update, [NativeTypeName("libvlc_media_player_watch_time_on_paused")] IntPtr on_paused, [NativeTypeName("libvlc_media_player_watch_time_on_seek")] IntPtr on_seek, [NativeTypeName("void*")] IntPtr cbs_data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void libvlc_media_player_unwatch_time(libvlc_media_player_t* p_mi);
@@ -2429,16 +2455,17 @@ namespace LibVLC.AutoGen
         public static extern void libvlc_media_discoverer_list_release(libvlc_media_discoverer_description_t** pp_services, [NativeTypeName("size_t")] UIntPtr i_count);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_dialog_set_callbacks(libvlc_instance_t* p_instance, [NativeTypeName("const libvlc_dialog_cbs *")] libvlc_dialog_cbs* p_cbs, void* p_data);
+        public static extern void libvlc_dialog_set_callbacks(libvlc_instance_t* p_instance, [NativeTypeName("const libvlc_dialog_cbs *")] libvlc_dialog_cbs* p_cbs, [NativeTypeName("void*")] IntPtr p_data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_dialog_set_error_callback(libvlc_instance_t* p_instance, [NativeTypeName("libvlc_dialog_error_cbs")] IntPtr p_cbs, void* p_data);
+        public static extern void libvlc_dialog_set_error_callback(libvlc_instance_t* p_instance, [NativeTypeName("libvlc_dialog_error_cbs")] IntPtr p_cbs, [NativeTypeName("void*")] IntPtr p_data);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void libvlc_dialog_set_context(libvlc_dialog_id* p_id, void* p_context);
+        public static extern void libvlc_dialog_set_context(libvlc_dialog_id* p_id, [NativeTypeName("void*")] IntPtr p_context);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* libvlc_dialog_get_context(libvlc_dialog_id* p_id);
+        [return: NativeTypeName("void*")]
+        public static extern IntPtr libvlc_dialog_get_context(libvlc_dialog_id* p_id);
 
         [DllImport("libvlc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int libvlc_dialog_post_login(libvlc_dialog_id* p_id, [NativeTypeName("const char *")] byte* psz_username, [NativeTypeName("const char *")] byte* psz_password, [NativeTypeName("_Bool")] byte b_store);

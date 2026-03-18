@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<Compile Include="..\LibVLC.AutoGen\LibVLC.cs" Link="LibVLC.cs" />
+		<Compile Include="..\LibVLC.AutoGen\LibVLC.Extension.cs" Link="LibVLC.Extension.cs" />
 		<Compile Include="..\LibVLC.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
 	</ItemGroup>
 
