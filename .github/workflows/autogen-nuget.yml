@@ -23,14 +23,8 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore .NET tools
-        run: dotnet tool restore
-
-      - name: Generate C# code from generate.rsp
-        run: |
-          cd generation
-          dotnet ClangSharpPInvokeGenerator "@generate.rsp"
-          cd ..
+      - name: Generate P/Invoke code
+        run: powershell -ExecutionPolicy Bypass -File .\generation\generate.ps1
 
       - name: Build
         run: dotnet build --configuration Release

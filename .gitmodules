@@ -1,4 +1,4 @@
 [submodule "vlc"]
-	path = generation/vlc
+	path = vlc
 	url = https://github.com/videolan/vlc.git
 	shallow = true

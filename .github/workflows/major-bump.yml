@@ -22,12 +22,12 @@ jobs:
 
       - name: Update submodule to latest
         run: |
-          git submodule update --remote generation/vlc
+          git submodule update --remote vlc
 
       - name: Check if include/vlc updated
         id: check_include_vlc
         run: |
-          if [ -n "$(git status --porcelain generation/vlc/include/vlc)" ]; then
+          if [ -n "$(git status --porcelain vlc/include/vlc)" ]; then
             echo "updated=true" >> $GITHUB_OUTPUT
           else
             echo "updated=false" >> $GITHUB_OUTPUT
@@ -36,7 +36,7 @@ jobs:
       - name: Get current version
         id: get_version
         run: |
-          VERSION=$(grep -oP '<Version>\K[0-9]+\.[0-9]+\.[0-9]+' Directory.Build.props)
+          VERSION=$(grep -oP '<Version>\K[0-9]+\.[0-9]+\.[0-9]+' source/Directory.Build.props)
           echo "Current version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
@@ -48,7 +48,7 @@ jobs:
           IFS='.' read -r MAJOR MINOR PATCH <<< "$OLD_VERSION"
           NEW_MAJOR=$((MAJOR+1))
           NEW_VERSION="$NEW_MAJOR.0.0"
-          sed -i "s/<Version>$OLD_VERSION/<Version>$NEW_VERSION/" Directory.Build.props
+          sed -i "s/<Version>$OLD_VERSION/<Version>$NEW_VERSION/" source/Directory.Build.props
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
@@ -57,7 +57,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add Directory.Build.props generation/vlc
+          git add source/Directory.Build.props vlc
           git commit -m "Bump MAJOR version to ${{ steps.bump_version.outputs.new_version }} (vlc/include/vlc updated)"
           git push
 
@@ -66,3 +66,23 @@ jobs:
         run: |
           git tag v${{ steps.bump_version.outputs.new_version }}
           git push origin v${{ steps.bump_version.outputs.new_version }}
+
+      - name: Update README last-updated
+        run: |
+          NOW=$(date -u +"%Y-%m-%d %H:%M:%SZ")
+          FILE=README.md
+          if [ -f "$FILE" ]; then
+            if grep -q '^Last updated:' "$FILE"; then
+              sed -i "s/^Last updated:.*/Last updated: $NOW/" "$FILE" || true
+            else
+              echo "" >> "$FILE"
+              echo "Last updated: $NOW" >> "$FILE"
+            fi
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add "$FILE"
+            git commit -m "Update README last updated: $NOW" || echo "No README changes"
+            git push || echo "Push failed"
+          else
+            echo "README.md not found, skipping"
+          fi

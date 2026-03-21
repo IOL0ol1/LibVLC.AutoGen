@@ -9,6 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLC.AutoGen.Dynamic", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLC.AutoGen.Static", "sources\LibVLC.AutoGen.Static\LibVLC.AutoGen.Static.csproj", "{56C6183E-5FAC-37E2-ACCC-041C879EB563}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generation", "generation", "{7CB26925-F539-4817-8E88-909AF17E67C7}"
+	ProjectSection(SolutionItems) = preProject
+		generation\generate.ps1 = generation\generate.ps1
+		generation\generate.rsp = generation\generate.rsp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sources", "sources", "{6DFF0DCB-1D70-4BFB-A0C9-DD4CA33C6DBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibVLC.SourceGenerator", "generation\LibVLC.SourceGenerator\LibVLC.SourceGenerator.csproj", "{5FB3AB30-E40C-DFA7-01FC-80E2B6B8B14F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +37,19 @@ Global
 		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56C6183E-5FAC-37E2-ACCC-041C879EB563}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FB3AB30-E40C-DFA7-01FC-80E2B6B8B14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB3AB30-E40C-DFA7-01FC-80E2B6B8B14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB3AB30-E40C-DFA7-01FC-80E2B6B8B14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB3AB30-E40C-DFA7-01FC-80E2B6B8B14F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D66D7A98-A623-DB58-DA75-564E80852732} = {6DFF0DCB-1D70-4BFB-A0C9-DD4CA33C6DBD}
+		{FAD90C26-2B81-E906-92F4-88F9AE778899} = {6DFF0DCB-1D70-4BFB-A0C9-DD4CA33C6DBD}
+		{56C6183E-5FAC-37E2-ACCC-041C879EB563} = {6DFF0DCB-1D70-4BFB-A0C9-DD4CA33C6DBD}
+		{5FB3AB30-E40C-DFA7-01FC-80E2B6B8B14F} = {7CB26925-F539-4817-8E88-909AF17E67C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ACA57B7E-139B-4831-88C1-0CD9389CF088}

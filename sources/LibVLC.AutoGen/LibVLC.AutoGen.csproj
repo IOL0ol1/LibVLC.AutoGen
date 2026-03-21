@@ -1,9 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net452;netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
 		<PackageId>LibVLC.AutoGen</PackageId>
 		<Description>[unofficial] libvlc auto-generation P/Invoke bindings using [DllImport("libvlc")].</Description>
 	</PropertyGroup>
+ 
+	<ItemGroup>
+		<ProjectReference Include="..\..\generation\LibVLC.SourceGenerator\LibVLC.SourceGenerator.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+	</ItemGroup>
+ 
 
 </Project>

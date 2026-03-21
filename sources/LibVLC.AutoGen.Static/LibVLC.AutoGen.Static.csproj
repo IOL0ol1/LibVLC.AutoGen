@@ -1,17 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net452;netstandard2.0;netstandard2.1</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
 		<PackageId>LibVLC.AutoGen.Static</PackageId>
 		<Description>[unofficial] libvlc auto-generation P/Invoke bindings using [DllImport("__Internal")] for static linked libvlc.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="..\LibVLC.AutoGen\LibVLC.cs" Link="LibVLC.cs" />
-		<Compile Include="..\LibVLC.AutoGen\LibVLC.Extension.cs" Link="LibVLC.Extension.cs" />
-		<Compile Include="..\LibVLC.AutoGen\NativeTypeNameAttribute.cs" Link="NativeTypeNameAttribute.cs" />
+		<Compile Include="..\LibVLC.AutoGen\LibVLC.Extensions.cs" Link="LibVLC.Extensions.cs" />
+		<Compile Include="..\LibVLC.AutoGen\LibVLC.Interop.cs" Link="LibVLC.Interop.cs" />
+		<Compile Include="..\LibVLC.AutoGen\LibVLC.Interop.Partial.cs" Link="LibVLC.Interop.Partial.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\..\generation\LibVLC.SourceGenerator\LibVLC.SourceGenerator.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+	</ItemGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="LazyImport.Fody" Version="1.0.4" PrivateAssets="All" />
 	</ItemGroup>
