@@ -82,4 +82,4 @@ Create a new VLC media control using the video rendering API `libvlc_video_set_o
  
  This project is licensed under the MIT License.      
  But the LibVLC is licensed under the GNU LGPLv2.1 License, use and distribution must comply with the LGPL.
-Last updated: 2026-06-02 02:50:27Z
+Last updated: 2026-06-03 02:59:11Z
